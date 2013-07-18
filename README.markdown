@@ -64,18 +64,22 @@ C-style comments (/* ... */) are safe to use to comment files.
 
 *Example:*
 ```
-$FLOAT Britghness, 1.0, 0.0, 2.0
+$FLOAT Brightness, 1.0, 0.0, 2.0, 0.5, 1.5, 0.1, Total Brightness, 5
 /* A float uniform called Brightness with a default 
-value of 1.0 and a parameter ranging from 0 to 2 */
+value of 1.0, ranging from 0 to 2 and the slider ranging
+from 0.5 to 1.5. Step value is 0.1. In a GUI the name is 
+displayed as "Total Brightness" and the unique parameter
+ID is 5. */
 ```
 
 #### Sections
 
 
-**$VERTEX** / **$FRAGMENT**
+**$VERTEX**/**$FRAGMENT**
 
-The VERTEX and FRAGMENT commands mark the start of the vertex/fragment shaders. All text/parameters after the commands are added to the respective shader.
+The **$VERTEX** and **$FRAGMENT** commands mark the start of the vertex/fragment shaders. All text/parameters after the commands are added to the respective shader.
 
+#### Meta Information
 
 #### Parameters
 
@@ -85,14 +89,13 @@ The first argument of a parameter command is always the variable name which will
 
 The parameter ID is used to store parameter data. If you have finished developing your plug-in and want to use it in production it is wise to manually set the parameter ID, othwerwise it might change if you add new parameters and recompile.
 
-
 ***
 **$FLOAT** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=1.0]f, [slider_min=0.0]f, [slider_max=1.0]f, [delta=0.1]f, *[full_name]s, [param_id]i*
 
 Creates a **float** uniform variable *var_name* connected to a slider. **param_min/param_max** set the parameter range while **slider_min/slider_max** set only the range for the slider. **delta** is the step value a parameter is increase by using arrow up/down keys.
 
 ```
-$FLOAT Britghness, 1.0, 0.0, 2.0, 0.5, 1.5
+$FLOAT Brightness, 1.0, 0.0, 2.0, 0.5, 1.5
 /* A float uniform called Brightness with a default 
 value of 1.0, a parameter range from 0 to 2 but a 
 slider range of just 0.5 to 1.5 */
@@ -101,15 +104,119 @@ slider range of just 0.5 to 1.5 */
 ***
 **$INT** [var_name]s, [default_value=0]i, [param_min=0]i, [param_max=10]i, [slider_min=0]i, [slider_max=10]i, [delta=10]i, *[full_name]s, [param_id]i*
 
-Basically the same as **FLOAT** but creates an **int** uniform variable.
+Basically the same as **$FLOAT** but creates an **int** uniform variable and an integer slider.
 
 ***
 **$ANGLE** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=360.0]f, *[full_name]s, [param_id]i*
 
-Creates two **float** uniforms connected to a rotary angle knob: **[var_name]** which contains the angle in degrees and **[var_name]_rad** which contains the angle in radians.
+Creates two **float** uniforms connected to a rotary angle knob: **var_name** which contains the angle in degrees and **var_name**_rad which contains the angle in radians.
 
 ```
 $ANGLE Angle, 0.0, -90.0, 90.0
 /* Two float uniforms called Angle and Angle_rad with
 a default value of 0.0, ranging from -90° to 90°. */
 ```
+
+***
+**$TOGGLE** [var_name]s, [default_value=True]b, *[full_name]s, [param_id]i*
+
+Creates a *bool* uniform variable *var_name* connected to a checkbox. The default_value can be seit either by true/false or yes/no and is case insensitive.
+
+```
+$TOGGLE UseTexture, True
+/* A bool uniform called UsedTexture ticked by default. */
+```
+
+***
+**$POINT** [var_name]s, [default_x]f, [default_y]f, *[full_name]s, [param_id]i*
+
+Creates a *vec2* uniform variable *var_name* connected to two sliders and a onscreen-control. Coordinates are in 0..1 range.
+
+***
+**$RGBA** [var_name]s, [default_red=0.0]f, [default_green=0.0]f, [default_blue=0.0]f, [default_alpha=1.0]f, *[full_name]s, [param_id]i*
+
+Creates a **vec4** uniform variable **var_name** connected to a RGB color selector with aditional alpha slider. All values are in 0..1 range.
+
+```
+$RGBA Color, 1.0, 0.0, 0.0, 1.0
+/* A vec4 uniform with solid red as default color. */
+```
+
+***
+**$RGB** [var_name]s, [default_red=0.0]f, [default_green=0.0]f, [default_blue=0.0]f, *[full_name]s, [param_id]i*
+
+Basically the same as **$RGBA** but creates a **vec3** uniform and has no alpha control.
+
+***
+**$IMAGE** [var_name]s, *[full_name]s, [param_id]i*
+
+Creates a **sampler2DRect** uniform variable **var_name** connected to a drop-zone where you can put images, clips or groups from your timeline. Additionally the **vec2** uniform **var_name**_dim is created, containing the image dimensions in pixels.
+
+```
+$IMAGE ModImage
+/* Creates a sampler2DRect uniform variable
+called ModImage which can be sampled with texture2DRect */
+```
+
+***
+**$FLOATPOPUP** [var_name]s, [default_index]i, {[name]s, [value]f}n, [full_name]s, [param_id]i
+
+Creates a **float** uniform variable **var_name** which is set by a popup menu. There can be as many **name** and **value** pairs as one likes. Because in this syntax it is impossible to distinguish between **name/value** pairs and **full_name/param_id** you have to explicitly specify **full_name** and **param_id**.
+
+**default_index** starts with 0 and must be a valid index.
+
+```
+$FLOATPOPUP Value, 2, Nothing, 0.0, Half, 0.5, Full, 1.0, Value, 20
+/* Creates a float uniform variable and a popup menu with
+3 choices. The default selection is "Full" */
+```
+
+***
+**$INTPOPUP** [var_name]s, [default_index]i, {[name]s, [value]f}n, [full_name]s, [param_id]i
+
+Basically the same as **$FLOATPOPUP** but creates an **int** uniform variable.
+
+```
+$INTPOPUP Channel, 0, Red, 0, Green, 1, Blue, 2, Color Channel, 21
+/* Creates a int uniform variable and a popup menu with
+3 choices. The default selection is "Red" */
+```
+
+***
+**$SUBGROUP** [var_name]s, *[full_name]s, [param_id]i*
+
+Creates a collapsable subgroup in which all following parameters until the next **$ENDSUBGROUP** are put in. It doesn't create an uniform variable, unfortunately a valid **var_name** is still needed for book-keeping.
+
+If **$SUBGROUP** is used when a subgroup is already open it will close it automatically and open a new one.
+
+```
+$SUBGROUP Group1, Group 1, 120
+/* Creates a subgroup displayed with
+"Group 1", with a unique paramater ID 120.
+Group1 is only used for internal book-keeping. */
+```
+
+***
+**$ENDSUBGROUP**
+
+Closes a subgroup opened with **$SUBGROUP**. Only can be used when there's an open subgroup.
+
+#### Other Uniforms
+
+***
+**$INPUT**
+
+***
+**$TIME**
+
+***
+**$CLIPTIME**
+
+***
+**$CLIPDURATION**
+
+***
+**FPS**
+
+***
+**SCALE**
