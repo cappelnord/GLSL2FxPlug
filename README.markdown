@@ -69,6 +69,7 @@ value of 1.0 and a parameter ranging from 0 to 2 */
 #### Sections
 
 **$VERTEX**
+
 **$FRAGMENT**
 
 The VERTEX and FRAGMENT commands mark the start of the vertex/fragment shaders. All text/parameters after the commands are added to the respective shader.
