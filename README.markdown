@@ -100,10 +100,10 @@ uuidgen
 * **$CLASSNAME** class and file name for the FxPlug (must be valid C variable name)
 * **$DISPLAYNAME** plug-in name displayed in effect library
 * **$DESCRIPTION** descriptive text, also displayed in the effect library
-* **GROUP** name of the group the plug-in will be in the effect library
-* **GROUPUUID** UUID of the group (must be the same for all plug-ins in the same group)
-* **BUNDLEID** bundle identifier
-* **UUID** UUID of the plug-in (must be unique, don't copy glsl2fxplug files, create new templates which have unique UUIDs)
+* **$GROUP** name of the group the plug-in will be in the effect library
+* **$GROUPUUID** UUID of the group (must be the same for all plug-ins in the same group)
+* **$BUNDLEID** bundle identifier
+* **$UUID** UUID of the plug-in (must be unique, that's why creating new templates is better than copying files)
 
 #### Parameters
 
