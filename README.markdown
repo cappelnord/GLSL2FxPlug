@@ -84,7 +84,7 @@ The first argument of a parameter command is always the variable name which will
 The parameter ID is used to store parameter data. If you have finished developing your plug-in and want to use it in production it is wise to manually set the parameter ID, othwerwise it might change if you add new parameters and recompile.
 
 
-
+---
 **$FLOAT** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=1.0]f, [slider_min=0.0]f, [slider_max=1.0]f, [delta=0.1]f, [full_name]s, [param_id]i
 
 Creates a **float** uniform variable [var_name] connected to a slider. [param_min]/[param_max] set the parameter range while [slider_min/slider_max] set only the range for the slider. [delta] is used to increase the value with arrow up/down keys.
