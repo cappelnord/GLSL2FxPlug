@@ -71,9 +71,11 @@ value of 1.0 and a parameter ranging from 0 to 2 */
 
 #### Sections
 
+---
 **$VERTEX** / **$FRAGMENT**
 
 The VERTEX and FRAGMENT commands mark the start of the vertex/fragment shaders. All text/parameters after the commands are added to the respective shader.
+---
 
 #### Parameters
 
@@ -87,7 +89,7 @@ The parameter ID is used to store parameter data. If you have finished developin
 ---
 **$FLOAT** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=1.0]f, [slider_min=0.0]f, [slider_max=1.0]f, [delta=0.1]f, [full_name]s, [param_id]i
 
-Creates a **float** uniform variable [var_name] connected to a slider. [param_min]/[param_max] set the parameter range while [slider_min/slider_max] set only the range for the slider. [delta] is used to increase the value with arrow up/down keys.
+Creates a **float** uniform variable *var_name* connected to a slider. **param_min/param_max** set the parameter range while **slider_min/slider_max** set only the range for the slider. **delta** is the step value a parameter is increase by using arrow up/down keys.
 
 ```
 $FLOAT Britghness, 1.0, 0.0, 2.0, 0.5, 1.5
