@@ -71,11 +71,11 @@ value of 1.0 and a parameter ranging from 0 to 2 */
 
 #### Sections
 
-***
+
 **$VERTEX** / **$FRAGMENT**
 
 The VERTEX and FRAGMENT commands mark the start of the vertex/fragment shaders. All text/parameters after the commands are added to the respective shader.
-***
+
 
 #### Parameters
 
@@ -87,7 +87,7 @@ The parameter ID is used to store parameter data. If you have finished developin
 
 
 ***
-**$FLOAT** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=1.0]f, [slider_min=0.0]f, [slider_max=1.0]f, [delta=0.1]f, [full_name]s, [param_id]i
+**$FLOAT** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=1.0]f, [slider_min=0.0]f, [slider_max=1.0]f, [delta=0.1]f, *[full_name]s, [param_id]i*
 
 Creates a **float** uniform variable *var_name* connected to a slider. **param_min/param_max** set the parameter range while **slider_min/slider_max** set only the range for the slider. **delta** is the step value a parameter is increase by using arrow up/down keys.
 
@@ -98,5 +98,18 @@ value of 1.0, a parameter range from 0 to 2 but a
 slider range of just 0.5 to 1.5 */
 ```
 
+***
+**$INT** [var_name]s, [default_value=0]i, [param_min=0]i, [param_max=10]i, [slider_min=0]i, [slider_max=10]i, [delta=10]i, *[full_name]s, [param_id]i*
 
+Basically the same as **FLOAT** but creates an **int** uniform variable.
 
+***
+**$ANGLE** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=360.0]f, *[full_name]s, [param_id]i*
+
+Creates two **float** uniforms connected to a rotary angle knob: **[var_name]** which contains the angle in degrees and **[var_name]_rad** which contains the angle in radians.
+
+```
+$ANGLE Angle, 0.0, -90.0, 90.0
+/* Two float uniforms called Angle and Angle_rad with
+a default value of 0.0, ranging from -90° to 90°. */
+```
