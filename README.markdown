@@ -1,14 +1,14 @@
 GLSL2FxPlug
 ===========
 
-Automatic GLSL Shader to FxPlug Converter
+Automatic GLSL to FxPlug Converter
 ----------------------------------------
 
 GLSL is the OpenGL Shader Language, used to program the OpenGL Rendering Pipeline. It is used in 3D graphics but also for hardware accelerated image and video effects. GLSL2FxPlug lets you embed your GLSL fragment shaders into FxPlug plug-ins which can be used in Motion and supposedly in Final Cut Pro.
 
 In general this isn't a very difficult to do, it's even in the FxPlug SDKs examples. GLSL2FxPlug does two things to make things easier and faster: First of all it automates all steps from Xcode project generation, up until installation of the plug-in. Second it uses a simple macro-style language to annotate meta information and to connect the GLSL uniform variables with parameters, which then are used for controlling and automating parameters.
 
-GLSL2FxPlug wasn't designed for professional FxPlug developement, but as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro.
+GLSL2FxPlug wasn't designed for professional FxPlug developement, but as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro to make GPU accelerated video effects.
 
 ### Installation
 
@@ -17,6 +17,8 @@ GLSL2FxPlug currently is designed to run in its own folder, so just clone this r
 * Xcode (from Apple App Store)
 * Xcode Command Line Tools (in Xcode->Preferences->Downloads)
 * FxPlug SDK (Can be downloaded with a free Apple Developer account)
+
+GLSL2FxPlug uses Python, which is allready installed on all Mac OS X versions. GLSL2FxPlug will not work on Windows and Linux.
 
 If glsl2fxplug.sh can't be executed you might need to make it executable.
 
@@ -27,16 +29,16 @@ chmod +x glsl2fxplug.sh
 ### General Usage
 
 * Run **glsl2fxplug.sh template** to generate a .glsl2fxplug file template
-* Edit FxPlug meta information (see Meta Information)
+* Edit FxPlug meta information (see **Meta Information**)
 * Copy your GLSL shader source code into the .glsl2fxplug file (or write it from scratch)
-* Replace all uniform variables with $-commands (see Parameters)
+* Replace all uniform variables with $-commands (see **Parameters**)
 * Be sure to use sampler2DRect and not sampler2D
 * Run **glsl2fxplug.sh build/install** to compile and/or install your FxPlug
 * Open Motion to test your new FxPlug plug-in (You might need to restart Motion for your plug-in or the changes to appear) 
 
 ### Usage
 
-glsl2fxplug.sh is run in the Terminal. It takes two arguments:
+glsl2fxplug.sh is run in the Terminal, taking two arguments:
 
 ```
 ./glsl2fxplug.sh [command] [classname]
@@ -54,6 +56,11 @@ The following commands are available:
 * **build-notest** generates and builds a project but does not run GLSLTest
 * **install-notest** same as build-notest but also installs the plug-in
 
+*Example: (generates, builds and install the example file)*
+```
+./glsl2fxplug.sh install Example.glsl2fxplug
+```
+
 ### GLSL2FxPlug Files
 
 GLSL2FxPlug files are standard text files, containing shader source cod and $-commands (lines starting with a $ sign and a command in capital letters). Commands are used to set meta-information, annotate sections or to add parameters.
@@ -65,11 +72,10 @@ C-style comments (/* ... */) are safe to use to comment files.
 *Example:*
 ```
 $FLOAT Brightness, 1.0, 0.0, 2.0, 0.5, 1.5, 0.1, Total Brightness, 5
-/* A float uniform called Brightness with a default 
-value of 1.0, ranging from 0 to 2 and the slider ranging
-from 0.5 to 1.5. Step value is 0.1. In a GUI the name is 
-displayed as "Total Brightness" and the unique parameter
-ID is 5. */
+/* A float uniform called Brightness with a default  value of 1.0, 
+ranging from 0 to 2 and the slider ranging from 0.5 to 1.5. Step value
+is 0.1. In a GUI the name is  displayed as "Total Brightness" and the
+unique parameter ID is 5. */
 ```
 
 #### Sections
@@ -80,6 +86,24 @@ ID is 5. */
 The **$VERTEX** and **$FRAGMENT** commands mark the start of the vertex/fragment shaders. All text/parameters after the commands are added to the respective shader.
 
 #### Meta Information
+
+Meta information about the plug-in usually is in the top of the file. Currently all available meta information commands are generated through the template.
+
+If you need another UUID you can generate it in the Terminal:
+
+```
+uuidgen
+```
+
+* **$GLSL2FXPLUG** file format version (currently 1)
+* **$TYPE** FxPlug type. Currently only "filter" is implemented
+* **$CLASSNAME** class and file name for the FxPlug (must be valid C variable name)
+* **$DISPLAYNAME** plug-in name displayed in effect library
+* **$DESCRIPTION** descriptive text, also displayed in the effect library
+* **GROUP** name of the group the plug-in will be in the effect library
+* **GROUPUUID** UUID of the group (must be the same for all plug-ins in the same group)
+* **BUNDLEID** bundle identifier
+* **UUID** UUID of the plug-in (must be unique, don't copy glsl2fxplug files, create new templates which have unique UUIDs)
 
 #### Parameters
 
@@ -201,7 +225,7 @@ Group1 is only used for internal book-keeping. */
 
 Closes a subgroup opened with **$SUBGROUP**. Only can be used when there's an open subgroup.
 
-#### Other Uniforms
+#### Other Uniform Variables
 
 These uniform variables don't create a parameter, that's why only need a variable name and not a display name or parameter ID. They're used to get information from the host, clip and/or timeline.
 
