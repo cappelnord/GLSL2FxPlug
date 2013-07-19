@@ -4,11 +4,11 @@ GLSL2FxPlug
 Automatic GLSL to FxPlug Converter
 ----------------------------------------
 
-GLSL is the OpenGL Shader Language, used to program the OpenGL Rendering Pipeline. It is used in 3D graphics but also for hardware accelerated image and video effects. GLSL2FxPlug lets you embed your GLSL fragment shaders into FxPlug plug-ins which can be used in Motion and supposedly in Final Cut Pro.
+GLSL is the OpenGL Shader Language, used to program parts of the OpenGL Rendering Pipeline. It is used in 3D graphics but also for hardware accelerated image and video effects. GLSL2FxPlug lets you embed your GLSL fragment shaders into FxPlug plug-ins which can be used in Motion and supposedly in Final Cut Pro.
 
-In general this isn't a very difficult to do, it's even in the FxPlug SDKs examples. GLSL2FxPlug does two things to make things easier and faster: First of all it automates all steps from Xcode project generation, up until installation of the plug-in. Second it uses a simple macro-style language to annotate meta information and to connect the GLSL uniform variables with parameters, which then are used for controlling and automating parameters.
+In general this isn't a very difficult to do, it's even in the FxPlug SDKs examples. GLSL2FxPlug does two things to make things easier and faster: First of all it automates all steps from Xcode project generation, up until installation of the plug-in. Second it uses a simple macro-style language to annotate meta information and to connect GLSL uniform variables to parameters, which then are used for control and automation in Motion.
 
-GLSL2FxPlug wasn't designed for professional FxPlug development, but as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro to make GPU accelerated video effects.
+GLSL2FxPlug isn't designed for professional FxPlug development, more as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro to create GPU accelerated video effects.
 
 ### Installation
 
