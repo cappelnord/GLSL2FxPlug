@@ -1,0 +1,32 @@
+$GLSL2FXPLUG  1
+$TYPE         filter
+$CLASSNAME    ToggleTest
+$DISPLAYNAME  ToggleTest
+$DESCRIPTION  Descriptive Text
+$GROUP		  GLSL2FxPlugTests
+$GROUPUUID    FCDD2966-3E67-42DF-8FB1-EE3677ED28D8
+$BUNDLEID     your.company.toggletest
+$UUID         8CAC6F7C-7164-4052-9A3B-E85E149397A9
+
+
+$VERTEX
+/* Add your vertex shader parameters here */
+
+void main() {
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+$FRAGMENT
+/* Add your fragment shader parameters here */
+$INPUT InputTexture
+$TOGGLE decision
+
+void main() {
+	if(decision) {
+    	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    } else {
+    	gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    }
+}
+

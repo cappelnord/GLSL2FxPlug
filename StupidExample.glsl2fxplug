@@ -1,0 +1,78 @@
+$GLSL2FXPLUG  1
+$TYPE         filter
+$CLASSNAME    StupidExample
+$DISPLAYNAME  Stupid Example
+$DESCRIPTION  Example with different parameter types.
+$GROUP		  GLSL2FxPlug
+$GROUPUUID    7E03B162-9472-4CE9-ADA5-139E0C6BDD32
+$BUNDLEID     de.cappelnord.glsl2fxplug.example
+$UUID         50B09D8D-4385-4734-9BE8-95A87AF2D44E
+
+
+$VERTEX
+void main() {
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+$FRAGMENT
+/* The shader itself is stupid, but shows a lot of
+   different parameter types!
+
+   Also keep in mind, that conditionals aren't very
+   fast in GLSL, especially on old GPUs. */
+
+$INPUT InputTexture
+
+$POINT Pos, 0, 0, Position, 13
+$FLOAT Size, 20, 0, 1000, 0, 1000, 1, Point Size, 17
+
+$IMAGE ModTexture, Displacement Map, 18
+
+$SUBGROUP Displacement, Displacement, 10
+$FLOAT DisplX, 0, -300, 300, -300, 300, 1, X-Displacement, 11
+$FLOAT DisplY, 0, -300, 300, -300, 300, 1, Y-Displacement, 12
+$ENDSUBGROUP
+
+$SUBGROUP ColorDistance, Color Distance, 16
+$TOGGLE UseColor, False, Use Color Distance, 15
+$RGB Color, 0, 0, 0, Distance Color, 14
+$ENDSUBGROUP
+
+$INTPOPUP FilterChannel, 0, None, -1, Red, 0, Green, 1, Blue, 2, Filter Color Channel, 19
+
+$SCALE Scale
+$CLIPTIME ClipTime
+
+float brightness(vec4 c) {
+    return dot(c, vec4(0.3, 0.584, 0.114, 0.0));
+}
+
+void main() {
+	float oscillation = (sin(ClipTime) + 1.0) * 0.25;
+	vec2 displace = vec2(DisplX, DisplY) * Scale;
+
+	vec2 st = gl_TexCoord[0].st;
+	vec2 mod_st = st * (ModTexture_dim / InputTexture_dim);
+	vec4 mod_c = texture2DRect(ModTexture, mod_st);
+
+	float distance;
+	if(UseColor) {
+		distance = distance(mod_c.rgb, Color);
+	} else { /* use Brightness */
+		distance = brightness(mod_c);
+	}
+
+	float coord_distance = abs(distance(Pos * InputTexture_dim, st));
+	float scaled_size = Size * Scale[0] * (1.0 + oscillation);
+	float point_distance_delta = clamp(scaled_size - coord_distance, 0.0, InputTexture_dim[0]) / scaled_size;
+
+	vec4 c = texture2DRect(InputTexture, st + displace * distance * point_distance_delta);
+
+	if(FilterChannel >= 0) {
+		c[FilterChannel] = c[FilterChannel] * (1.0 - point_distance_delta);
+	}
+
+    gl_FragColor = c;
+}
+

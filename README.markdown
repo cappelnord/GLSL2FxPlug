@@ -34,7 +34,8 @@ chmod +x glsl2fxplug.sh
 * Replace all uniform variables with $-commands (see **Parameters**)
 * Be sure to use sampler2DRect and not sampler2D
 * Run **glsl2fxplug.sh build/install** to compile and/or install your FxPlug
-* Open Motion to test your new FxPlug plug-in (You might need to restart Motion for your plug-in or the changes to appear) 
+* In the output/ folder you'll find the FxPlug and the generated Xcode project for further hacking
+* Test your plug-in! (You might need to restart Motion for your plug-in or the changes to appear) 
 
 ### Usage
 
@@ -52,13 +53,13 @@ The following commands are available:
 * **build** generates and builds a FxPlug from an existing glsl2fxplug file
 * **install** same as build but also installs the plug-in to ~/Library/Plug-Ins/FxPlug/
 * **test** doesn't generate a project, just parses file and runs GLSLTest
-* **generate** generates a project but doesn't build it
+* **generate** generates a project but doesn't build and test it
 * **build-notest** generates and builds a project but does not run GLSLTest
 * **install-notest** same as build-notest but also installs the plug-in
 
 *Example: (generates, builds and install the example file)*
 ```
-./glsl2fxplug.sh install Example.glsl2fxplug
+./glsl2fxplug.sh install StupidExample.glsl2fxplug
 ```
 
 ### GLSL2FxPlug Files

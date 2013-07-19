@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${CLASSNAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>${BUNDLEID}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${CLASSNAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>${CLASSNAME}</string>
+	<key>ProPlugDictionaryVersion</key>
+	<string>1.0</string>
+	<key>ProPlugDynamicRegistration</key>
+	<false/>
+	<key>ProPlugPlugInGroupList</key>
+	<array>
+		<dict>
+			<key>groupName</key>
+			<string>${GROUP}</string>
+			<key>uuid</key>
+			<string>${GROUPUUID}</string>
+		</dict>
+	</array>
+	<key>ProPlugPlugInList</key>
+	<array>
+		<dict>
+			<key>className</key>
+			<string>${CLASSNAME}</string>
+			<key>displayName</key>
+			<string>${DISPLAYNAME}</string>
+			<key>group</key>
+			<string>${GROUPUUID}</string>
+			<key>infoString</key>
+			<string>${DESCRIPTION}</string>
+			<key>protocolNames</key>
+			<array>
+				<string>FxFilter</string>
+			</array>
+			<key>uuid</key>
+			<string>${UUID}</string>
+			<key>version</key>
+			<string>1</string>
+		</dict>
+	</array>
+</dict>
+</plist>

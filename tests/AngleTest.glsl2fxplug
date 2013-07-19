@@ -1,0 +1,28 @@
+$GLSL2FXPLUG  1
+$TYPE         filter
+$CLASSNAME    AngleTest
+$DISPLAYNAME  AngleTest
+$DESCRIPTION  Descriptive Text
+$GROUP		  GLSL2FxPlugTests
+$GROUPUUID    FCDD2966-3E67-42DF-8FB1-EE3677ED28D8
+$BUNDLEID     your.company.angletest
+$UUID         F9DC99F3-AF15-4524-B1E5-83E87EE56215
+
+$VERTEX
+/* Add your vertex shader parameters here */
+
+void main() {
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+$FRAGMENT
+/* Add your fragment shader parameters here */
+$INPUT InputTexture
+
+$ANGLE Angle, 0, -360, 360, The good Angle!
+
+void main() {
+    gl_FragColor = vec4(Angle, Angle * -1.0, 0.0, 360.0) / 360.0;
+}
+

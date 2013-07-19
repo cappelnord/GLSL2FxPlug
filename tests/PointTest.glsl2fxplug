@@ -1,0 +1,32 @@
+$GLSL2FXPLUG  1
+$TYPE         filter
+$CLASSNAME    PointTest
+$DISPLAYNAME  PointTest
+$DESCRIPTION  Descriptive Text
+$GROUP		  GLSL2FxPlugTests
+$GROUPUUID    FCDD2966-3E67-42DF-8FB1-EE3677ED28D8
+$BUNDLEID     your.company.pointtest
+$UUID         46FE5028-B206-4288-B311-0D42AB0FE42E
+
+
+$VERTEX
+/* Add your vertex shader parameters here */
+
+void main() {
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+$FRAGMENT
+/* Add your fragment shader parameters here */
+$INPUT InputTexture
+$POINT Point, 0.5, 0.5, The Point
+
+void main() {
+	vec2 p = Point * InputTexture_dim;
+	vec2 st = gl_TexCoord[0].st;
+	float x = distance(p, st);
+
+    gl_FragColor = vec4(x / InputTexture_dim[0], 0.0, 0.0, 1.0);
+}
+

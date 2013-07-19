@@ -1,0 +1,31 @@
+$GLSL2FXPLUG  1
+$TYPE         filter
+$CLASSNAME    PopupTest
+$DISPLAYNAME  PopupTest
+$DESCRIPTION  Descriptive Text
+$GROUP		  GLSL2FxPlugTests
+$GROUPUUID    FCDD2966-3E67-42DF-8FB1-EE3677ED28D8
+$BUNDLEID     your.company.popuptest
+$UUID         9652F753-1F0E-4721-AAD4-39790D14D311
+
+
+$VERTEX
+/* Add your vertex shader parameters here */
+
+void main() {
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+$FRAGMENT
+/* Add your fragment shader parameters here */
+$INPUT InputTexture
+$INTPOPUP Color, 0, Red, 0, Green, 1, Blue, 2, Color, 1
+$FLOATPOPUP Strength, 0, Nothing, 0.0, Quarter, 0.25, Half, 0.5, Three-Quarter, 0.75, Full, 1.0, Strength, 2
+
+void main() {
+	vec4 c = vec4(0.0, 0.0, 0.0, 1.0);
+	c[Color] = Strength;
+    gl_FragColor = c;
+}
+

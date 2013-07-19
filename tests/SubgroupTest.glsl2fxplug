@@ -1,0 +1,37 @@
+$GLSL2FXPLUG  1
+$TYPE         filter
+$CLASSNAME    SubgroupTest
+$DISPLAYNAME  SubgroupTest
+$DESCRIPTION  Descriptive Text
+$GROUP		  GLSL2FxPlugTests
+$GROUPUUID    FCDD2966-3E67-42DF-8FB1-EE3677ED28D8
+$BUNDLEID     your.company.subgrouptest
+$UUID         EE379480-1878-4B46-8557-81D81B668279
+
+
+$VERTEX
+/* Add your vertex shader parameters here */
+
+void main() {
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+$FRAGMENT
+/* Add your fragment shader parameters here */
+$INPUT InputTexture
+$FLOAT OK
+$SUBGROUP Good, The good subgroup!
+$FLOAT Yes
+$FLOAT No
+$INT Walter
+$ENDSUBGROUP
+$FLOAT Maybe
+$SUBGROUP Bad, The Bad
+$TOGGLE Bla
+$TOGGLE Blu
+
+void main() {
+    gl_FragColor = texture2DRect(InputTexture, gl_TexCoord[0].st);
+}
+
