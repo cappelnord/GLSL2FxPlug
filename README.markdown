@@ -8,7 +8,7 @@ GLSL is the OpenGL Shader Language, used to program the OpenGL Rendering Pipelin
 
 In general this isn't a very difficult to do, it's even in the FxPlug SDKs examples. GLSL2FxPlug does two things to make things easier and faster: First of all it automates all steps from Xcode project generation, up until installation of the plug-in. Second it uses a simple macro-style language to annotate meta information and to connect the GLSL uniform variables with parameters, which then are used for controlling and automating parameters.
 
-GLSL2FxPlug wasn't designed for professional FxPlug developement, but as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro to make GPU accelerated video effects.
+GLSL2FxPlug wasn't designed for professional FxPlug development, but as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro to make GPU accelerated video effects.
 
 ### Installation
 
@@ -110,9 +110,9 @@ uuidgen
 
 Instead of uniform variables you have to use parameter commands (which will be translated to standard GLSL uniforms). 
 
-The first argument of a parameter command is always the variable name which will be used in GLSL. The last two arguments are usually a display name (which can contain spaces) which is displayed by the FxPlug (if not specified the variable name is used) and a unique parameter ID (integer) which is created automatically when omited.
+The first argument of a parameter command is always the variable name which will be used in GLSL. The last two arguments are usually a display name (which can contain spaces) which is displayed by the FxPlug (if not specified the variable name is used) and a unique parameter ID (integer) which is created automatically when omitted.
 
-The parameter ID is used to store parameter data. If you have finished developing your plug-in and want to use it in production it is wise to manually set the parameter ID, othwerwise it might change if you add new parameters and recompile.
+The parameter ID is used to store parameter data. If you have finished developing your plug-in and want to use it in production it is wise to manually set the parameter ID, otherwise it might change if you add new parameters and recompile.
 
 ***
 **$FLOAT** [var_name]s, [default_value=0.0]f, [param_min=0.0]f, [param_max=1.0]f, [slider_min=0.0]f, [slider_max=1.0]f, [delta=0.1]f, *[display_name]s, [param_id]i*
@@ -145,7 +145,7 @@ a default value of 0.0, ranging from -90° to 90°. */
 ***
 **$TOGGLE** [var_name]s, [default_value=True]b, *[display_name]s, [param_id]i*
 
-Creates a **bool** uniform variable **var_name** connected to a checkbox. The default_value can be seit either by true/false or yes/no and is case insensitive.
+Creates a **bool** uniform variable **var_name** connected to a checkbox. The default_value can be set either by true/false or yes/no and is case insensitive.
 
 ```
 $TOGGLE UseTexture, True
@@ -160,7 +160,7 @@ Creates a **vec2** uniform variable **var_name** connected to two sliders and a 
 ***
 **$RGBA** [var_name]s, [default_red=0.0]f, [default_green=0.0]f, [default_blue=0.0]f, [default_alpha=1.0]f, *[display_name]s, [param_id]i*
 
-Creates a **vec4** uniform variable **var_name** connected to a RGB color selector with aditional alpha slider. All values are in 0..1 range.
+Creates a **vec4** uniform variable **var_name** connected to a RGB color selector with additional alpha slider. All values are in 0..1 range.
 
 ```
 $RGBA Color, 1.0, 0.0, 0.0, 1.0
@@ -258,5 +258,5 @@ Creates a **float** uniform variable **var_name** containing the duration of the
 ***
 **FPS** [var_name]s
 
-Creates a **float** uniform variable **var_name** which contains the framerate of the timeline.
+Creates a **float** uniform variable **var_name** which contains the frame rate of the timeline.
 
