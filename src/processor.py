@@ -287,7 +287,9 @@ def __processor_color(obj, cmd, pl, alpha):
 		v["gl_type"] = "vec4"
 		v["set_uniform"] = "glUniform4f"
 
-		v["alpha_parm"] = "\ndefaultAlpha:%(default_a)s\n"%v
+		v["alpha_parm"] = """
+                       defaultAlpha:%(default_a)s\n"""%v
+        
 		v["alpha_var"] = ", %(c_name)s_a"%v
 		v["alpha_parm_retrieve"] = "\nalphaValue:&%(c_name)s_a\n"%v
 	
