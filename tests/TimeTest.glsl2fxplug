@@ -3,7 +3,7 @@ $TYPE         filter
 $CLASSNAME    TimeTest
 $DISPLAYNAME  TimeTest
 $DESCRIPTION  Descriptive Text
-$GROUP		  GLSL2FxPlugTests
+$GROUP        GLSL2FxPlugTests
 $GROUPUUID    FCDD2966-3E67-42DF-8FB1-EE3677ED28D8
 $BUNDLEID     your.company.timetest
 $UUID         9C8CD832-554D-497F-8A86-BAD58E64D386

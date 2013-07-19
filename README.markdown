@@ -1,7 +1,7 @@
 GLSL2FxPlug
 ===========
 
-Automatic GLSL to FxPlug Converter
+Simple GLSL to FxPlug Converter
 ----------------------------------------
 
 GLSL is the OpenGL Shader Language, used to program parts of the OpenGL Rendering Pipeline. It is used in 3D graphics but also for hardware accelerated image and video effects. GLSL2FxPlug lets you embed your GLSL fragment shaders into FxPlug plug-ins which can be used in Motion and supposedly in Final Cut Pro.
@@ -26,7 +26,7 @@ If glsl2fxplug.sh can't be executed you might need to make it executable.
 chmod +x glsl2fxplug.sh
 ```
 
-### General Usage
+### General Usage Pattern
 
 * Run **glsl2fxplug.sh template** to generate a .glsl2fxplug file template
 * Edit FxPlug meta information (see **Meta Information**)

@@ -143,7 +143,7 @@ $TYPE         filter
 $CLASSNAME    %(name)s
 $DISPLAYNAME  %(name)s
 $DESCRIPTION  Descriptive Text
-$GROUP		  GLSL2FxPlug
+$GROUP        GLSL2FxPlug
 $GROUPUUID    7E03B162-9472-4CE9-ADA5-139E0C6BDD32
 $BUNDLEID     your.company.%(lower_name)s
 $UUID         %(uuid)s

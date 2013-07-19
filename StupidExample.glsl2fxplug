@@ -3,7 +3,7 @@ $TYPE         filter
 $CLASSNAME    StupidExample
 $DISPLAYNAME  Stupid Example
 $DESCRIPTION  Example with different parameter types.
-$GROUP		  GLSL2FxPlug
+$GROUP        GLSL2FxPlug
 $GROUPUUID    7E03B162-9472-4CE9-ADA5-139E0C6BDD32
 $BUNDLEID     de.cappelnord.glsl2fxplug.example
 $UUID         50B09D8D-4385-4734-9BE8-95A87AF2D44E
@@ -49,29 +49,29 @@ float brightness(vec4 c) {
 }
 
 void main() {
-	float oscillation = (sin(ClipTime) + 1.0) * 0.25;
-	vec2 displace = vec2(DisplX, DisplY) * Scale;
+    float oscillation = (sin(ClipTime) + 1.0) * 0.25;
+    vec2 displace = vec2(DisplX, DisplY) * Scale;
 
-	vec2 st = gl_TexCoord[0].st;
-	vec2 mod_st = st * (ModTexture_dim / InputTexture_dim);
-	vec4 mod_c = texture2DRect(ModTexture, mod_st);
+    vec2 st = gl_TexCoord[0].st;
+    vec2 mod_st = st * (ModTexture_dim / InputTexture_dim);
+    vec4 mod_c = texture2DRect(ModTexture, mod_st);
 
-	float distance;
-	if(UseColor) {
-		distance = distance(mod_c.rgb, Color);
-	} else { /* use Brightness */
-		distance = brightness(mod_c);
-	}
+    float distance;
+    if(UseColor) {
+        distance = distance(mod_c.rgb, Color);
+    } else { /* use Brightness */
+        distance = brightness(mod_c);
+    }
 
-	float coord_distance = abs(distance(Pos * InputTexture_dim, st));
-	float scaled_size = Size * Scale[0] * (1.0 + oscillation);
-	float point_distance_delta = clamp(scaled_size - coord_distance, 0.0, InputTexture_dim[0]) / scaled_size;
+    float coord_distance = abs(distance(Pos * InputTexture_dim, st));
+    float scaled_size = Size * Scale[0] * (1.0 + oscillation);
+    float point_distance_delta = clamp(scaled_size - coord_distance, 0.0, InputTexture_dim[0]) / scaled_size;
 
-	vec4 c = texture2DRect(InputTexture, st + displace * distance * point_distance_delta);
+    vec4 c = texture2DRect(InputTexture, st + displace * distance * point_distance_delta);
 
-	if(FilterChannel >= 0) {
-		c[FilterChannel] = c[FilterChannel] * (1.0 - point_distance_delta);
-	}
+    if(FilterChannel >= 0) {
+        c[FilterChannel] = c[FilterChannel] * (1.0 - point_distance_delta);
+    }
 
     gl_FragColor = c;
 }
