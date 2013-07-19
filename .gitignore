@@ -9,3 +9,4 @@ ehthumbs.db
 Thumbs.db
 
 output
+*/*.pyc
