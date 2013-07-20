@@ -10,6 +10,8 @@ In general this isn't a very difficult to do, it's even in the FxPlug SDKs examp
 
 GLSL2FxPlug isn't designed for professional FxPlug development, more as a tool for creative coders to easily bring their GLSL skills to Motion/Final Cut Pro to create GPU accelerated video effects.
 
+**[A little demo/tutorial video on YouTube](http://youtu.be/nbUO_lM7aAw)**
+
 ### Installation
 
 GLSL2FxPlug currently is designed to run in its own folder, so just clone this repository into a working directory. In order to compile plug-ins you need to install:
