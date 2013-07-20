@@ -275,13 +275,20 @@ def main(cmd, file):
 		print "Invalid command:", cmd
 		print HELP
 		sys.exit(RETURNCODES["invalid_command"])
-	
-	if not file.find(".") > 0:
-		file  = file + ".glsl2fxplug"
+
+	if not file.find(".") >= 0:
+		file = file + ".glsl2fxplug"
 
 	if cmd == "template":
 		generate_template(file)
 		sys.exit(0)
+	else:
+		if not os.path.isfile(file):
+			original_file = file
+			file = file + ".glsl2fxplug"
+			if not os.path.isfile(file):
+				print "File \"%s\" not found. I'm giving up!"%(original_file)
+				sys.exit(RETURNCODES["could_not_read_file"])
 	
 	phases = CMDPHASES[cmd]
 	
@@ -291,7 +298,7 @@ def main(cmd, file):
 
 	data = process_file(file)
 	if not data:
-		print "Processing ", file, "failed.\nI'm giving up!"
+		print "Processing ", file, "failed. I'm giving up!"
 		sys.exit(RETURNCODES["could_not_read_file"])
 
 	for k in data["info"].keys():
